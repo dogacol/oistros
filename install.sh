@@ -3,9 +3,7 @@
 # Oistros installer — single-line setup for Linux (including Raspberry Pi)
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/<owner>/oistros/main/install.sh | bash
-#   — or —
-#   git clone <repo> && cd oistros && bash install.sh
+#   git clone https://github.com/dogacol/oistros && cd oistros && bash install.sh
 #
 set -euo pipefail
 
@@ -29,9 +27,21 @@ fi
 ARCH=$(uname -m)
 info "Detected architecture: ${BOLD}${ARCH}${NC}"
 
+# ── Project directory ───────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
+
+if [[ ! -f "$PROJECT_DIR/pyproject.toml" ]]; then
+    error "pyproject.toml not found. Run this script from the oistros repo directory."
+    exit 1
+fi
+
+cd "$PROJECT_DIR"
+info "Project directory: ${BOLD}${PROJECT_DIR}${NC}"
+
 # ── Python ──────────────────────────────────────────────────────────
 PYTHON=""
-for cmd in python3.12 python3.11 python3.10 python3; do
+for cmd in python3.13 python3.12 python3.11 python3.10 python3; do
     if command -v "$cmd" &>/dev/null; then
         PYTHON="$cmd"
         break
@@ -57,25 +67,7 @@ fi
 PY_VERSION=$("$PYTHON" --version 2>&1)
 info "Using ${BOLD}${PY_VERSION}${NC}"
 
-# ── Project directory ───────────────────────────────────────────────
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_DIR="$SCRIPT_DIR"
-
-# If we're not inside the repo (e.g. piped from curl), clone it
-if [[ ! -f "$PROJECT_DIR/oistros.py" ]]; then
-    if [[ -d "$HOME/oistros" ]]; then
-        PROJECT_DIR="$HOME/oistros"
-        info "Using existing directory at $PROJECT_DIR"
-    else
-        error "oistros.py not found. Please run this script from the project directory."
-        exit 1
-    fi
-fi
-
-cd "$PROJECT_DIR"
-info "Project directory: ${BOLD}${PROJECT_DIR}${NC}"
-
-# ── Virtual environment ─────────────────────────────────────────────
+# ── Virtual environment + pip install ───────────────────────────────
 VENV_DIR="$PROJECT_DIR/.venv"
 if [[ ! -d "$VENV_DIR" ]]; then
     info "Creating virtual environment..."
@@ -85,13 +77,21 @@ fi
 source "$VENV_DIR/bin/activate"
 info "Virtual environment activated"
 
-# ── Python dependencies ─────────────────────────────────────────────
-info "Installing Python dependencies..."
+info "Installing oistros..."
 pip install --upgrade pip -q
-pip install -r requirements.txt -q
-info "Python dependencies installed"
+pip install -e . -q
+info "oistros installed"
+
+# Verify the command works
+if command -v oistros &>/dev/null; then
+    info "Command 'oistros' is available"
+else
+    info "Command available via: ${BOLD}$VENV_DIR/bin/oistros${NC}"
+fi
 
 # ── Ollama ──────────────────────────────────────────────────────────
+STARTED_OLLAMA=false
+
 if command -v ollama &>/dev/null; then
     OLLAMA_VERSION=$(ollama --version 2>&1 || echo "unknown")
     info "Ollama already installed: ${BOLD}${OLLAMA_VERSION}${NC}"
@@ -105,43 +105,21 @@ fi
 MODEL="qwen3:0.6b"
 info "Pulling model ${BOLD}${MODEL}${NC} (this may take a few minutes on first run)..."
 
-# Start ollama serve in background if not already running
 if ! curl -s http://localhost:11434/api/tags &>/dev/null; then
     info "Starting Ollama server..."
     ollama serve &>/dev/null &
     OLLAMA_PID=$!
     sleep 3
     STARTED_OLLAMA=true
-else
-    STARTED_OLLAMA=false
 fi
 
-ollama pull "$MODEL" || warn "Could not pull model. You can pull it later with: ollama pull $MODEL"
+ollama pull "$MODEL" || warn "Could not pull model. Pull it later with: ollama pull $MODEL"
 
-# ── Create directories ──────────────────────────────────────────────
-mkdir -p "$PROJECT_DIR/output" "$PROJECT_DIR/logs" "$PROJECT_DIR/texts/cache"
+# ── Create working directories ──────────────────────────────────────
+mkdir -p "$PROJECT_DIR/output" "$PROJECT_DIR/logs"
 
-# ── Create run script ──────────────────────────────────────────────
-cat > "$PROJECT_DIR/run.sh" << 'RUNEOF'
-#!/usr/bin/env bash
-# Run Oistros
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/.venv/bin/activate"
-
-# Ensure Ollama is running
-if ! curl -s http://localhost:11434/api/tags &>/dev/null; then
-    echo "[oistros] Starting Ollama server..."
-    ollama serve &>/dev/null &
-    sleep 3
-fi
-
-exec python3 "$SCRIPT_DIR/oistros.py" "$@"
-RUNEOF
-chmod +x "$PROJECT_DIR/run.sh"
-
-# ── Create systemd service (optional) ──────────────────────────────
-SERVICE_FILE="$PROJECT_DIR/oistros.service"
-cat > "$SERVICE_FILE" << SVCEOF
+# ── Create systemd service file ─────────────────────────────────────
+cat > "$PROJECT_DIR/oistros.service" << SVCEOF
 [Unit]
 Description=Oistros — the philosophical gadfly
 After=network-online.target ollama.service
@@ -151,7 +129,8 @@ Wants=network-online.target
 Type=simple
 User=$USER
 WorkingDirectory=$PROJECT_DIR
-ExecStart=$PROJECT_DIR/run.sh daemon
+Environment="PATH=$VENV_DIR/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=$VENV_DIR/bin/oistros
 Restart=on-failure
 RestartSec=60
 
@@ -164,18 +143,22 @@ echo ""
 info "${BOLD}Oistros installed successfully.${NC}"
 echo ""
 echo -e "  ${BOLD}Quick start:${NC}"
-echo -e "    ${DIM}# Test passage fetching and news scanning (no LLM needed):${NC}"
-echo -e "    ./run.sh test"
+echo -e "    ${DIM}# Activate the virtualenv first:${NC}"
+echo -e "    source .venv/bin/activate"
+echo ""
+echo -e "    ${DIM}# Test passage fetching + news scanning (no LLM):${NC}"
+echo -e "    oistros test"
 echo ""
 echo -e "    ${DIM}# Run one full cycle:${NC}"
-echo -e "    ./run.sh once"
+echo -e "    oistros run"
 echo ""
-echo -e "    ${DIM}# Run as a daemon (every 30 minutes):${NC}"
-echo -e "    ./run.sh daemon"
+echo -e "    ${DIM}# Start the daemon (cycle every 30 min):${NC}"
+echo -e "    oistros"
 echo ""
-echo -e "    ${DIM}# Or use cron (every 30 min):${NC}"
-echo -e "    crontab -e"
-echo -e "    */30 * * * * $PROJECT_DIR/run.sh once"
+echo -e "    ${DIM}# Other commands:${NC}"
+echo -e "    oistros read     ${DIM}# fetch a random passage${NC}"
+echo -e "    oistros scan     ${DIM}# scan current news${NC}"
+echo -e "    oistros log      ${DIM}# show recent outputs${NC}"
 echo ""
 echo -e "    ${DIM}# Or install as a systemd service:${NC}"
 echo -e "    sudo cp oistros.service /etc/systemd/system/"

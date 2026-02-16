@@ -12,9 +12,11 @@ from typing import Optional
 
 logger = logging.getLogger("oistros.writer")
 
-BASE_DIR = Path(__file__).parent
-OUTPUT_DIR = BASE_DIR / "output"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+def _get_output_dir() -> Path:
+    d = Path.cwd() / "output"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
 
 
 def format_output(
@@ -25,11 +27,6 @@ def format_output(
     model: str = "",
     timestamp: Optional[datetime] = None,
 ) -> str:
-    """
-    Format the thinker's output as a markdown document with metadata.
-
-    Returns the full markdown string.
-    """
     if timestamp is None:
         timestamp = datetime.now()
 
@@ -45,6 +42,10 @@ def format_output(
 
     date_str = timestamp.strftime("%Y-%m-%d %H:%M")
 
+    passage_preview = text[:300]
+    if len(text) > 300:
+        passage_preview += "..."
+
     lines = [
         f"# Oistros — {date_str}",
         "",
@@ -58,21 +59,18 @@ def format_output(
     if urn:
         lines.append(f"**URN:** `{urn}`")
 
-    # Include a truncated version of the passage
-    passage_preview = text[:300]
-    if len(text) > 300:
-        passage_preview += "..."
     lines.extend([
         f"**Passage:** \"{passage_preview}\"",
         "",
         f"**Trending:** {news_summary.strip()[:300]}",
-        "",
-        f"**Model:** {model}" if model else "",
-        f"**Generated:** {timestamp.isoformat()}",
     ])
 
-    # Filter empty lines at end
-    return "\n".join(line for line in lines if line is not None).rstrip() + "\n"
+    if model:
+        lines.append(f"**Model:** {model}")
+
+    lines.append(f"**Generated:** {timestamp.isoformat()}")
+
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def write_output(
@@ -84,22 +82,17 @@ def write_output(
     timestamp: Optional[datetime] = None,
     output_dir: Optional[Path] = None,
 ) -> Path:
-    """
-    Write the formatted output to a dated markdown file.
-
-    Returns the path to the written file.
-    """
+    """Write formatted output to a dated markdown file. Returns the path."""
     if timestamp is None:
         timestamp = datetime.now()
     if output_dir is None:
-        output_dir = OUTPUT_DIR
+        output_dir = _get_output_dir()
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
     filename = timestamp.strftime("%Y-%m-%d_%H%M") + ".md"
     filepath = output_dir / filename
 
-    # Avoid overwriting: append a counter if needed
     counter = 1
     while filepath.exists():
         filename = timestamp.strftime("%Y-%m-%d_%H%M") + f"_{counter}.md"
@@ -118,7 +111,6 @@ def write_output(
     filepath.write_text(content, encoding="utf-8")
     logger.info("Wrote output to %s", filepath)
 
-    # Also write thinking trace if present (separate file, for review)
     if thinking:
         think_path = filepath.with_suffix(".thinking.md")
         think_content = f"# Thinking Trace — {timestamp.strftime('%Y-%m-%d %H:%M')}\n\n{thinking}\n"
@@ -126,27 +118,3 @@ def write_output(
         logger.info("Wrote thinking trace to %s", think_path)
 
     return filepath
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-
-    # Test output
-    test_passage = {
-        "author": "Heraclitus",
-        "work": "Fragments",
-        "reference": "Fragment B53",
-        "text": "War is the father of all and king of all.",
-        "urn": "urn:cts:greekLit:tlg0004.tlg001",
-    }
-    test_response = "The defence minister speaks of *readiness* as though it were a posture one could adopt at will..."
-    test_news = "NATO summit tensions over defense spending"
-
-    path = write_output(
-        response=test_response,
-        passage=test_passage,
-        news_summary=test_news,
-        model="qwen3:0.6b",
-    )
-    print(f"Test output written to: {path}")
-    print(path.read_text())

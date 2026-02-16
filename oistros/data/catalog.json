@@ -1,0 +1,328 @@
+{
+  "sources": [
+    {
+      "author": "Homer",
+      "work": "Iliad",
+      "urn": "urn:cts:greekLit:tlg0012.tlg001.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0012.tlg001.perseus-eng3",
+      "api": "scaife",
+      "citation_scheme": ["book", "line"],
+      "books": 24
+    },
+    {
+      "author": "Homer",
+      "work": "Odyssey",
+      "urn": "urn:cts:greekLit:tlg0012.tlg002.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0012.tlg002.perseus-eng3",
+      "api": "scaife",
+      "citation_scheme": ["book", "line"],
+      "books": 24
+    },
+    {
+      "author": "Hesiod",
+      "work": "Works and Days",
+      "urn": "urn:cts:greekLit:tlg0020.tlg002.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0020.tlg002.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["line"],
+      "discover": true
+    },
+    {
+      "author": "Heraclitus",
+      "work": "Fragments",
+      "api": "local",
+      "fragments": [
+        {"id": "B1", "text": "Of this logos, which holds forever, people prove uncomprehending."},
+        {"id": "B2", "text": "Therefore one must follow what is common. But although the logos is common, most people live as though they had their own private understanding."},
+        {"id": "B5", "text": "They purify themselves by defiling themselves with blood, as if one who had stepped into mud were to wash with mud."},
+        {"id": "B8", "text": "What is in opposition is in concert, and from what differs comes the most beautiful harmony."},
+        {"id": "B10", "text": "Graspings: wholes and not wholes, convergent divergent, consonant dissonant, from all things one and from one all things."},
+        {"id": "B12", "text": "Upon those who step into the same rivers, different and again different waters flow."},
+        {"id": "B18", "text": "If one does not hope, one will not find the unhoped-for, since it is not to be hunted out and is impassable."},
+        {"id": "B30", "text": "This world-order, the same for all, no god or man has made, but it ever was and is and shall be: an ever-living fire, kindling in measures and going out in measures."},
+        {"id": "B44", "text": "The people must fight for their law as for their city wall."},
+        {"id": "B45", "text": "You would not find the limits of the soul by going, even if you traveled every road — so deep is its logos."},
+        {"id": "B49a", "text": "We step and do not step into the same rivers; we are and are not."},
+        {"id": "B53", "text": "War is the father of all and king of all; and some he shows as gods, others as men; some he makes slaves, others free."},
+        {"id": "B60", "text": "The way up and the way down are one and the same."},
+        {"id": "B80", "text": "One must know that war is common, and justice is strife, and all things come to be through strife and are so ordained."},
+        {"id": "B88", "text": "And it is the same thing in us that is living and dead, awake and asleep, young and old."},
+        {"id": "B90", "text": "All things are an exchange for fire and fire for all things, as goods for gold and gold for goods."},
+        {"id": "B91", "text": "It is not possible to step into the same river twice."},
+        {"id": "B101", "text": "I searched for myself."},
+        {"id": "B101a", "text": "Eyes are more accurate witnesses than ears."},
+        {"id": "B112", "text": "Sound thinking is the greatest virtue, and wisdom is speaking the truth and acting according to nature, attending to it."},
+        {"id": "B119", "text": "Character is destiny."},
+        {"id": "B123", "text": "Nature loves to hide."},
+        {"id": "B125a", "text": "Even the barley-drink separates if it is not stirred."}
+      ]
+    },
+    {
+      "author": "Parmenides",
+      "work": "On Nature",
+      "api": "local",
+      "fragments": [
+        {"id": "B2", "text": "Come, I will tell you — and you, hearing my word, carry it away — which are the only ways of inquiry for thinking: the one, that it is and that it is not possible for it not to be, is the path of persuasion, for truth attends it; the other, that it is not and that it must not be — this I say to you is a path wholly unthinkable."},
+        {"id": "B3", "text": "For it is the same thing to think and to be."},
+        {"id": "B6", "text": "What is there to be said and thought must needs be: for it is there for being, but nothing is not."},
+        {"id": "B8", "text": "There remains, then, but one word by which to express the true road: Is. And on this road there are many signs that what is is uncreated and imperishable, whole, unique, immovable, and without end."}
+      ]
+    },
+    {
+      "author": "Empedocles",
+      "work": "Fragments",
+      "api": "local",
+      "fragments": [
+        {"id": "B17", "text": "A twofold tale I shall tell: at one time they grew to be one alone out of many, at another they grew apart to be many out of one. Double is the generation of mortal things and double their failing."},
+        {"id": "B27", "text": "There neither the swift limbs of the sun are distinguished... but so it remained under the close cover of Harmony, a rounded Sphere, rejoicing in its circular solitude."},
+        {"id": "B112", "text": "Friends, who dwell in the great city of the golden Acragas... I go about among you as an immortal god, no longer mortal, honored as is fitting."}
+      ]
+    },
+    {
+      "author": "Sophocles",
+      "work": "Antigone",
+      "urn": "urn:cts:greekLit:tlg0011.tlg002.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0011.tlg002.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["line"],
+      "discover": true
+    },
+    {
+      "author": "Sophocles",
+      "work": "Oedipus Tyrannus",
+      "urn": "urn:cts:greekLit:tlg0011.tlg004.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0011.tlg004.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["line"],
+      "discover": true
+    },
+    {
+      "author": "Euripides",
+      "work": "Bacchae",
+      "urn": "urn:cts:greekLit:tlg0006.tlg013.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0006.tlg013.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["line"],
+      "discover": true
+    },
+    {
+      "author": "Euripides",
+      "work": "Medea",
+      "urn": "urn:cts:greekLit:tlg0006.tlg003.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0006.tlg003.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["line"],
+      "discover": true
+    },
+    {
+      "author": "Aeschylus",
+      "work": "Agamemnon",
+      "urn": "urn:cts:greekLit:tlg0085.tlg005.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0085.tlg005.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["line"],
+      "discover": true
+    },
+    {
+      "author": "Aeschylus",
+      "work": "Prometheus Bound",
+      "urn": "urn:cts:greekLit:tlg0085.tlg003.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0085.tlg003.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["line"],
+      "discover": true
+    },
+    {
+      "author": "Thucydides",
+      "work": "History of the Peloponnesian War",
+      "urn": "urn:cts:greekLit:tlg0003.tlg001.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0003.tlg001.perseus-eng6",
+      "api": "scaife",
+      "citation_scheme": ["book", "chapter", "section"],
+      "books": 8
+    },
+    {
+      "author": "Herodotus",
+      "work": "Histories",
+      "urn": "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0016.tlg001.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["book", "chapter"],
+      "books": 9
+    },
+    {
+      "author": "Plato",
+      "work": "Apology",
+      "urn": "urn:cts:greekLit:tlg0059.tlg002.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0059.tlg002.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["section"],
+      "discover": true
+    },
+    {
+      "author": "Plato",
+      "work": "Republic",
+      "urn": "urn:cts:greekLit:tlg0059.tlg030.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0059.tlg030.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["book", "stephanus"],
+      "books": 10
+    },
+    {
+      "author": "Plato",
+      "work": "Symposium",
+      "urn": "urn:cts:greekLit:tlg0059.tlg011.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0059.tlg011.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["section"],
+      "discover": true
+    },
+    {
+      "author": "Plato",
+      "work": "Phaedrus",
+      "urn": "urn:cts:greekLit:tlg0059.tlg012.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0059.tlg012.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["section"],
+      "discover": true
+    },
+    {
+      "author": "Plato",
+      "work": "Phaedo",
+      "urn": "urn:cts:greekLit:tlg0059.tlg004.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0059.tlg004.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["section"],
+      "discover": true
+    },
+    {
+      "author": "Plato",
+      "work": "Timaeus",
+      "urn": "urn:cts:greekLit:tlg0059.tlg031.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0059.tlg031.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["section"],
+      "discover": true
+    },
+    {
+      "author": "Aristotle",
+      "work": "Nicomachean Ethics",
+      "urn": "urn:cts:greekLit:tlg0086.tlg010.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0086.tlg010.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["book", "bekker"],
+      "books": 10,
+      "note": "Uses Bekker pagination (e.g. 1094a)"
+    },
+    {
+      "author": "Aristotle",
+      "work": "Politics",
+      "urn": "urn:cts:greekLit:tlg0086.tlg035.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0086.tlg035.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["book", "bekker"],
+      "books": 8,
+      "note": "Only on new Scaife viewer API, not old CTS. Uses Bekker pagination."
+    },
+    {
+      "author": "Aristotle",
+      "work": "Poetics",
+      "urn": "urn:cts:greekLit:tlg0086.tlg034.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0086.tlg034.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["section"],
+      "discover": true
+    },
+    {
+      "author": "Aristotle",
+      "work": "Metaphysics",
+      "urn": "urn:cts:greekLit:tlg0086.tlg025.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0086.tlg025.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["book", "bekker"],
+      "books": 14,
+      "note": "Uses Bekker pagination."
+    },
+    {
+      "author": "Epictetus",
+      "work": "Discourses",
+      "urn": "urn:cts:greekLit:tlg0557.tlg001.perseus-grc2",
+      "api": "scaife",
+      "citation_scheme": ["book", "chapter", "section"],
+      "books": 4,
+      "note": "Greek only via Scaife. Has book 0 (preliminary)."
+    },
+    {
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "urn": "urn:cts:greekLit:tlg0557.tlg002.perseus-grc2",
+      "api": "scaife",
+      "citation_scheme": ["section"],
+      "discover": true
+    },
+    {
+      "author": "Plotinus",
+      "work": "Enneads",
+      "urn": "urn:cts:greekLit:tlg2000.tlg001.1st1K-grc1",
+      "api": "scaife",
+      "citation_scheme": ["ennead", "tractate", "chapter"],
+      "books": 6,
+      "note": "Greek only (1st1K project, Volkmann edition). No English on Scaife."
+    },
+    {
+      "author": "Lucretius",
+      "work": "De Rerum Natura",
+      "urn": "urn:cts:latinLit:phi0550.phi001.perseus-lat2",
+      "translation_urn": "urn:cts:latinLit:phi0550.phi001.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["book", "line"],
+      "books": 6
+    },
+    {
+      "author": "Pindar",
+      "work": "Olympian Odes",
+      "urn": "urn:cts:greekLit:tlg0033.tlg001.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0033.tlg001.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["ode", "line"],
+      "discover": true
+    },
+    {
+      "author": "Diogenes Laertius",
+      "work": "Lives of the Eminent Philosophers",
+      "urn": "urn:cts:greekLit:tlg0004.tlg001.perseus-grc2",
+      "translation_urn": "urn:cts:greekLit:tlg0004.tlg001.perseus-eng2",
+      "api": "scaife",
+      "citation_scheme": ["book", "section"],
+      "books": 10,
+      "note": "Book 6 = Cynics, Book 9 = Heraclitus/Democritus."
+    },
+    {
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "api": "local",
+      "note": "George Long translation. Public domain.",
+      "fragments": [
+        {"id": "2.1", "text": "Begin the morning by saying to thyself, I shall meet with the busy-body, the ungrateful, arrogant, deceitful, envious, unsocial. All these things happen to them by reason of their ignorance of what is good and evil."},
+        {"id": "2.14", "text": "Though thou shouldst be going to live three thousand years, and as many times ten thousand years, still remember that no man loses any other life than this which he now lives, nor lives any other than this which he now loses."},
+        {"id": "4.3", "text": "Men seek retreats for themselves, houses in the country, sea-shores, and mountains; and thou too art wont to desire such things very much. But this is altogether a mark of the most common sort of men, for it is in thy power whenever thou shalt choose to retire into thyself."},
+        {"id": "4.36", "text": "Observe constantly that all things take place by change, and accustom thyself to consider that the nature of the Universe loves nothing so much as to change the things which are and to make new things like them."},
+        {"id": "4.43", "text": "Time is like a river made up of the events which happen, and a violent stream; for as soon as a thing has been seen, it is carried away, and another comes in its place, and this will be carried away too."},
+        {"id": "5.13", "text": "Like the vine that produces grapes and asks nothing more, so a horse runs, a bee makes honey, and a human being does helpful acts."},
+        {"id": "6.15", "text": "Some things are hurrying into existence, and others are hurrying out of it; and of that which is coming into existence part is already extinguished. Motions and changes are continually renewing the world."},
+        {"id": "7.9", "text": "All things are intertwined with one another; the bond is holy, and virtually nothing is alien to any other thing. For all things have been ranged together and jointly ordered into one cosmos."},
+        {"id": "8.47", "text": "If thou art pained by any external thing, it is not this thing that disturbs thee, but thy own judgement about it. And it is in thy power to wipe out this judgement now."},
+        {"id": "9.3", "text": "Do not despise death, but be well content with it, since this too is one of those things which nature wills."},
+        {"id": "10.31", "text": "Consider that before long thou wilt be nobody and nowhere, nor will any of the things exist which thou now seest, nor any of those who are now living."},
+        {"id": "12.4", "text": "I have often wondered how it is that every man loves himself more than all the rest of men, but yet sets less value on his own opinion of himself than on the opinion of others."}
+      ]
+    }
+  ],
+  "api_endpoints": {
+    "scaife_passage": "https://scaife.perseus.org/library/passage/{urn}:{ref}/json/",
+    "scaife_reffs": "https://scaife.perseus.org/library/{urn}/cts-api-xml/reffs/?level={level}",
+    "scaife_cts": "https://scaife-cts.perseus.org/api/cts",
+    "old_cts_passage": "https://scaife-cts.perseus.org/api/cts?request=GetPassage&urn={urn}:{ref}",
+    "old_cts_reffs": "https://scaife-cts.perseus.org/api/cts?request=GetValidReff&urn={urn}&level={level}"
+  }
+}
