@@ -1,0 +1,29 @@
+# Oistros configuration
+# =====================
+
+# How often to run (daemon mode only)
+interval_minutes: 30
+
+# Passage selection: "random" or "threaded" (follows recent themes)
+selection_mode: random
+
+# How many recent outputs to consider for avoiding repetition
+memory_context_size: 5
+
+# Thinker (LLM) settings
+thinker:
+  model: "qwen3:0.6b"
+  ollama_url: "http://localhost:11434"
+  thinking_mode: true       # Enable Qwen3 chain-of-thought
+  temperature: 0.7
+  max_tokens: 1024
+
+# Scanner (news) settings
+scanner:
+  max_topics: 5
+  # Uncomment to use custom feeds:
+  # feeds:
+  #   - name: "Reuters World"
+  #     url: "https://feeds.reuters.com/Reuters/worldNews"
+  #   - name: "BBC World"
+  #     url: "https://feeds.bbci.co.uk/news/world/rss.xml"
