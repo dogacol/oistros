@@ -14,13 +14,16 @@ from typing import Optional
 
 logger = logging.getLogger("oistros.memory")
 
-BASE_DIR = Path(__file__).parent
-DEFAULT_MEMORY_PATH = BASE_DIR / "logs" / "memory.jsonl"
+
+def _default_memory_path() -> Path:
+    p = Path.cwd() / ".oistros" / "memory.jsonl"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return p
 
 
 class Memory:
     def __init__(self, path: Optional[Path] = None):
-        self.path = path or DEFAULT_MEMORY_PATH
+        self.path = path or _default_memory_path()
         self.path.parent.mkdir(parents=True, exist_ok=True)
         if not self.path.exists():
             self.path.touch()
@@ -34,7 +37,6 @@ class Memory:
         model: str = "",
         output_path: str = "",
     ) -> None:
-        """Append a record of this cycle to the memory log."""
         entry = {
             "timestamp": datetime.now().isoformat(),
             "source_author": passage.get("author", ""),
@@ -56,7 +58,6 @@ class Memory:
         logger.info("Recorded memory entry for %s", entry["source_ref"])
 
     def get_recent(self, n: int = 20) -> list[dict]:
-        """Get the most recent N memory entries."""
         entries = []
         try:
             with open(self.path, "r", encoding="utf-8") as f:
@@ -69,48 +70,22 @@ class Memory:
                             continue
         except FileNotFoundError:
             return []
-
         return entries[-n:]
 
     def get_recent_themes(self, n: int = 10) -> str:
-        """
-        Build a brief summary of recent themes for the thinker's context.
-        Returns a string listing recent authors/works and response previews.
-        """
         recent = self.get_recent(n)
         if not recent:
             return ""
-
         lines = []
         for entry in recent:
             author = entry.get("source_author", "?")
             preview = entry.get("response_preview", "")[:100]
             lines.append(f"- {author}: {preview}")
-
         return "\n".join(lines)
 
-    def get_used_refs(self, n: int = 50) -> set:
-        """Get the set of source references used in recent entries."""
-        recent = self.get_recent(n)
-        return {entry.get("source_ref", "") for entry in recent if entry.get("source_ref")}
-
     def count(self) -> int:
-        """Count total memory entries."""
         try:
             with open(self.path, "r", encoding="utf-8") as f:
                 return sum(1 for line in f if line.strip())
         except FileNotFoundError:
             return 0
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-    mem = Memory()
-    print(f"Memory entries: {mem.count()}")
-    recent = mem.get_recent(5)
-    if recent:
-        print("Recent entries:")
-        for entry in recent:
-            print(f"  {entry['timestamp']} — {entry['source_ref']}")
-    else:
-        print("No entries yet.")

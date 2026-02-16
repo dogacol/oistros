@@ -3,11 +3,14 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
+dist/
+build/
 
 # Oistros runtime
 output/
 logs/
-texts/cache/
+.oistros/
+oistros.service
 
 # OS
 .DS_Store
