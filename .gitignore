@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Oistros runtime
+output/
+logs/
+texts/cache/
+
+# OS
+.DS_Store
+*.swp
+*.swo
